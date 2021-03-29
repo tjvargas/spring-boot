@@ -1,4 +1,8 @@
 package com.sippulse.pet.repository;
 
-public interface PetRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.sippulse.pet.entity.Pet;
+
+public interface PetRepository extends JpaRepository<Pet, Long>{
 }
