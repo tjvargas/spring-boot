@@ -13,8 +13,12 @@
  * Clinica pré cadastrada, se fosse um SaaS poderia pedir do ID dela no path ao invés do body;    
  * Profile de produção com variáveis de ambiente, profile de test usa o application.properties (default)
  * data.sql com uma base de testes e desenvolvimento
- * Documentação API: /swagger-ui.html    
-  
+ * Documentação API: /swagger-ui.html   
+ * Não foi criado todos os testes porque seriam repetivos. 
+ * Geralmente os services possuem regras de negócio, por isso só o agendamento possui service; 
+ 
+[Postman](https://www.getpostman.com/collections/257508413e725111b6e0) com script de login com token automático  
+https://www.getpostman.com/collections/257508413e725111b6e0
 # MER
 ![alt text](https://image.prntscr.com/image/317KEvpMRR2urzETKvAFCA.png)
 

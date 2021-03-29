@@ -40,7 +40,7 @@ public class AgendamentoController {
 	private AgendamentoService agendamentoService;
 
 	@GetMapping
-	public Page<AgendamentoDTO> listaAgendamentos(@RequestParam(required = false) String nomeRecurso, @RequestParam(required = false) LocalDate dia, Pageable pageable) {
+	public Page<AgendamentoDTO> listaAgendamentos(@RequestParam(required = false) String nomeRecurso, @RequestParam(required = false) String dia, Pageable pageable) {
 		return AgendamentoDTO.converter(this.agendamentoRepository.findByFilter(nomeRecurso, dia, pageable));
 	}
 

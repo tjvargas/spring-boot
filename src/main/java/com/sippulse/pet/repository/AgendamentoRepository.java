@@ -48,6 +48,9 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long>{
 			"	join a.recursos r " + 
 			"		where " +
 			"		(?1 is null or r.nome = ?1) " +
-			"	and (?2 is null or ?2 between a.dataAgendamento and a.dataTermino)	")
-	Page<Agendamento> findByFilter(String nomeRecurso, LocalDate dia, Pageable pageable);
+			"	and (?2 is null "
+			+ "		or (day(?2) between day(a.dataAgendamento) and day(a.dataTermino) "
+			+ "			and year(?2) between year(a.dataAgendamento) and year(a.dataTermino)	"
+			+ "			and day(?2) between month(a.dataAgendamento) and month(a.dataTermino)))	")
+	Page<Agendamento> findByFilter(String nomeRecurso, String dia, Pageable pageable);
 }
