@@ -1,10 +1,14 @@
 package com.sippulse.pet.controller;
 
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
@@ -38,13 +42,24 @@ public class AgendamentoControllerTest {
 	@Test
 	@WithMockUser
 	void shouldList() throws Exception {
-		this.mockMvc.perform(get("/agendamentos")).andDo(print()).andExpect(status().isOk());
+		this.mockMvc.perform(get("/agendamentos")).andDo(print())
+		.andExpect(status().isOk());
 	}
 	
 	@Test
 	@WithMockUser
 	void shouldListByVeterinarioOuData() throws Exception {
-		this.mockMvc.perform(get("/agendamentos?veterinario=Jumberlâncio&data=2021-05-05")).andDo(print()).andExpect(status().isOk());
+		this.mockMvc.perform(get("/agendamentos?veterinario=Jumberlâncio&dia=2021-05-05")).andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.content[0].dataAgendamento", is("2021-05-05T05:00:00")));
+	}
+	
+	@Test
+	@WithMockUser
+	void shouldListEmptyByVeterinarioOuData() throws Exception {
+		this.mockMvc.perform(get("/agendamentos?veterinario=Jumberlâncio&dia=2021-05-04")).andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.content", empty()));
 	}
 	
 	@Test
