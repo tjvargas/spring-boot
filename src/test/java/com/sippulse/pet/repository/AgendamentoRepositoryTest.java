@@ -87,7 +87,7 @@ public class AgendamentoRepositoryTest {
 		
 		Agendamento agendamento = em.find(Agendamento.class, 1l);
 		assertNotNull(agendamento);
-		assertEquals(agendamento.getRecursos().size(), 0);
+		assertEquals(agendamento.getRecursos().size(), 1);
 		
 		LocalDateTime dataInicio = LocalDateTime.now().plusDays(1);
 		LocalDateTime dataFim = dataInicio.plusMinutes(50);
